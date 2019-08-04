@@ -9,8 +9,8 @@
 import UIKit
 import NVActivityIndicatorView
 
-class CreateBookViewController: UIViewController {
-
+class CreateBookViewController: UIViewController, UITextFieldDelegate {
+    
     @IBOutlet weak var isbnTextField: UITextField!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var authorTextField: UITextField!
@@ -22,7 +22,7 @@ class CreateBookViewController: UIViewController {
     @IBOutlet weak var createButton: UIButton!
     
     var viewModel: CreateBookViewModel!
-        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -60,7 +60,7 @@ class CreateBookViewController: UIViewController {
                 }
             }.finally {
                 self.endLoading()
-            }
+        }
     }
     
     // MARK: Loading methods
@@ -76,5 +76,11 @@ class CreateBookViewController: UIViewController {
         self.view.isUserInteractionEnabled = true
         self.loaderView.stopAnimating()
         self.createButton.isHidden = false
+    }
+    
+    //MARK: TextField Delegates
+    internal func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
