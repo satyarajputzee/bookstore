@@ -35,7 +35,10 @@ class LoginViewModel {
         }
         return true
     }
-    
+    func getTVShows()-> Promise<TVShows>
+    {
+        return self.bookStoreApiClient.GetTVShows()
+    }
     func login(userName: String, password: String) -> Promise<GetLoginResponse> {
         return self.bookStoreApiClient.login(userName: userName, password: password)
     }

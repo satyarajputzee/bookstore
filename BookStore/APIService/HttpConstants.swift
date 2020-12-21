@@ -16,6 +16,10 @@ open class HttpConstants {
         /** The Authorization header key for HTTP request. */
         public static let Authorization = "Authorization"
         
+        public static let accessToken = "x-access-token"
+        
+        public static let guestToken = "X-Z5-Guest-Token"
+                
         /** The Content-Type header key for HTTP request. */
         public static let ContentType = "Content-Type"
         

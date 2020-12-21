@@ -48,10 +48,13 @@ class ApiClient {
     
     // MARK: private methods
     private func getAuthorizationHeaders() -> [String: String] {
+        
         guard let authToken = localSettings.authToken else {
             fatalError("Invalid operation. Missing OAuth token.")
         }
-        let headers = [HttpConstants.Header.Authorization: authToken]
+        let accessToken:String = "eyJ0eXAiOiJqd3QiLCJhbGciOiJIUzI1NiJ9.eyJwcm9kdWN0X2NvZGUiOiJ6ZWU1QDk3NSIsInBsYXRmb3JtX2NvZGUiOiJAbmRyb2lkQHBwQDEyMyIsImlzc3VlZEF0IjoiMjAyMC0xMi0yMVQwMDozMDowMiswMDAwIiwidHRsIjo4NjQwMH0.v5AgePPtDRAPwZBnaWeHXaKpSOhqc9B2pMOl8kzsgUM"
+
+        let headers = [HttpConstants.Header.accessToken:accessToken ]
         
         return headers
     }

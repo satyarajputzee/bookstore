@@ -70,6 +70,27 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 self.endLoading()
             }
     }
+    @IBAction func loginButtonClicked2() {
+        
+        
+        startLoading()
+                                     // we can force cast here as all valid check is done
+        self.viewModel.getTVShows()
+            .done { response in
+                print(response)
+            }.catch{ error in
+                switch error {
+                    case ApiError.authenicationFailure:
+                        self.showAlert(title: ErrorMessage.alertTitle.rawValue, message: ErrorMessage.loginFailed.rawValue)
+                    case ApiError.connectionFailure:
+                        self.showAlert(title: ErrorMessage.alertTitle.rawValue, message: ErrorMessage.connectionError.rawValue)
+                    default:
+                        self.showAlert(title: ErrorMessage.alertTitle.rawValue, message: ErrorMessage.unexpectedError.rawValue)
+                }
+            }.finally {
+                self.endLoading()
+            }
+    }
     
     fileprivate func registerKeyboardNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
