@@ -35,9 +35,14 @@ class LoginViewModel {
         }
         return true
     }
-    func getTVShows()-> Promise<TVShows>
+    func getTVShow()-> Promise<TVShow>
     {
-        return self.bookStoreApiClient.GetTVShows()
+        return self.bookStoreApiClient.GetTVShow()
+            .map ({ (tvs) -> TVShow in
+                return tvs
+            })
+
+    
     }
     func login(userName: String, password: String) -> Promise<GetLoginResponse> {
         return self.bookStoreApiClient.login(userName: userName, password: password)

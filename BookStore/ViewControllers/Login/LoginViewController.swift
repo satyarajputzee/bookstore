@@ -21,7 +21,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     var viewModel: LoginViewModel!
     private var activeTextField: UITextField!
-
+    private var tvshow:TVShow?
+    
     let bookCollectionSegueIdentifier = "openBookCollection"
 
     override func viewDidLoad() {
@@ -75,9 +76,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         
         startLoading()
                                      // we can force cast here as all valid check is done
-        self.viewModel.getTVShows()
+        self.viewModel.getTVShow()
             .done { response in
-                print(response)
+                self.tvshow = response
+                
             }.catch{ error in
                 switch error {
                     case ApiError.authenicationFailure:
